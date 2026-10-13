@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#07090F"/>
+  <circle cx="980" cy="120" r="220" fill="#6D7CFF" fill-opacity="0.18"/>
+  <circle cx="180" cy="520" r="180" fill="#4FD1C5" fill-opacity="0.12"/>
+  <text x="80" y="250" fill="#EDF2FF" font-family="Arial, sans-serif" font-size="64" font-weight="700">Gummadi Rakesh</text>
+  <text x="80" y="330" fill="#8B97FF" font-family="Arial, sans-serif" font-size="36" font-weight="600">Java Full Stack Developer</text>
+  <text x="80" y="400" fill="#9AA8C7" font-family="Arial, sans-serif" font-size="28">Spring Boot � REST APIs � Microservices � Kafka</text>
+</svg>

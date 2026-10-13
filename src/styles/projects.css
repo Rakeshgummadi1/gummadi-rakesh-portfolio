@@ -1,0 +1,581 @@
+/* Projects */
+.projects {
+  position: relative;
+  overflow: hidden;
+  padding: 64px 0 72px;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(21, 84, 240, 0.08), transparent 34%),
+    radial-gradient(circle at 92% 88%, rgba(11, 143, 208, 0.08), transparent 34%),
+    linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%);
+}
+
+.projects::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(21, 84, 240, 0.12) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 20%, #000 10%, transparent 65%);
+  mask-image: radial-gradient(ellipse at 50% 20%, #000 10%, transparent 65%);
+  pointer-events: none;
+}
+
+.projects .container {
+  position: relative;
+}
+
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.section-head__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border: 1px solid var(--blue-line);
+  border-radius: 100px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.section-head h2 {
+  margin-top: 14px;
+  color: var(--ink);
+  font-size: clamp(30px, 3vw, 46px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1px;
+}
+
+.section-head h2 span {
+  background: linear-gradient(90deg, var(--blue), #4f8bff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.section-head__lead {
+  max-width: 580px;
+  margin-top: 10px;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.section-head__link {
+  background: var(--blue);
+  color: #fff;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.project-grid > .reveal {
+  height: 100%;
+}
+
+/* Accent palettes shared by cards and the modal */
+.pcard,
+.project-modal {
+  --accent: var(--blue);
+  --accent-2: #4f8bff;
+}
+
+.pcard--cyan,
+.project-modal--cyan {
+  --accent: #0b8fd0;
+  --accent-2: #36c6f0;
+}
+
+/* Project card */
+.pcard {
+  container: pcard / inline-size;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 16px 40px rgba(20, 45, 110, 0.08);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s, border-color 0.35s;
+}
+
+.pcard:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--line));
+  box-shadow: 0 26px 56px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.pcard__cover {
+  position: relative;
+  min-height: 200px;
+  padding: 50px 22px 34px;
+  background:
+    radial-gradient(ellipse at 0% 0%, color-mix(in srgb, var(--accent) 85%, transparent), transparent 55%),
+    radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--accent-2) 55%, transparent), transparent 50%),
+    linear-gradient(180deg, color-mix(in srgb, var(--accent-2) 30%, #fff) 0%, color-mix(in srgb, var(--accent-2) 10%, #fff) 70%, #fff 100%);
+}
+
+.pcard__wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 34px;
+  fill: #fff;
+}
+
+.pcard__no {
+  position: absolute;
+  top: 14px;
+  left: 22px;
+  color: transparent;
+  font: 800 34px/1 var(--font-display);
+  letter-spacing: -1px;
+  -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.75);
+}
+
+.pcard__status {
+  position: absolute;
+  top: 16px;
+  left: 74px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px;
+  border-radius: 100px;
+  background: #fff;
+  color: #13854a;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px rgba(19, 133, 74, 0.22);
+}
+
+/* Narrow cards: platform chips shrink to icons so they never collide with the status badge */
+@container pcard (max-width: 440px) {
+  .pcard .pcard__platforms li {
+    gap: 0;
+    padding: 6px;
+    font-size: 0;
+  }
+}
+
+.pcard__status i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22b25c;
+  animation: roadmap-pulse-dot 1.8s ease-in-out infinite;
+}
+
+.pcard__status--inline {
+  position: static;
+  margin-left: 10px;
+  vertical-align: middle;
+  font-size: 11.5px;
+}
+
+.pcard__brand {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.pcard__logo {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: clamp(110px, 11vw, 150px);
+  aspect-ratio: 1;
+  transition: transform 0.4s var(--ease);
+}
+
+.pcard:hover .pcard__logo {
+  transform: scale(1.04);
+}
+
+.pcard__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* The store icon ships with its own grey rounded frame; scale it up and clip it away */
+.pcard__logo--square {
+  overflow: hidden;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(20, 45, 110, 0.18);
+}
+
+.pcard__logo--square img {
+  transform: scale(1.1);
+}
+
+.pcard__logo--circle img {
+  border-radius: 50%;
+  transform: scale(1.06);
+  box-shadow: 0 12px 28px rgba(20, 45, 110, 0.25);
+}
+
+.pcard__divider {
+  align-self: stretch;
+  width: 1.5px;
+  margin: 8px 0;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.pcard__brand-copy {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.pcard__brand-name {
+  color: color-mix(in srgb, var(--accent) 55%, #0b1633);
+  font: 800 clamp(22px, 2.1vw, 30px)/1.1 var(--font-display);
+  letter-spacing: -0.5px;
+}
+
+.pcard--blue .pcard__brand-name {
+  color: var(--blue);
+}
+
+.pcard__brand-name span {
+  color: #3aa935;
+}
+
+.pcard__brand-category {
+  color: #14254f;
+  font: 700 clamp(16px, 1.45vw, 20px)/1.2 var(--font-display);
+}
+
+.pcard__brand-subtitle {
+  color: #4a5675;
+  font-size: clamp(13px, 1.1vw, 15px);
+  line-height: 1.35;
+}
+
+.pcard__platforms {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  z-index: 1;
+  display: flex;
+  gap: 6px;
+}
+
+.pcard__platforms li {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  backdrop-filter: blur(6px);
+}
+
+.pcard__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 24px 24px;
+}
+
+.pcard__product {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.pcard__product span {
+  padding: 3px 9px;
+  border-radius: 100px;
+  background: color-mix(in srgb, var(--accent) 10%, #fff);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.pcard h3 {
+  color: var(--ink);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.pcard__role {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.pcard__desc {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+.pcard__more {
+  align-self: flex-start;
+  margin-top: -6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.pcard__more:hover {
+  text-decoration: underline;
+}
+
+.pcard__highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.pcard__highlights li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, #fff);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--accent) 6%, #fff);
+  color: var(--ink);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.pcard__highlights li::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+}
+
+.pcard__mobile {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-self: flex-start;
+  gap: 7px;
+  padding: 8px 12px;
+  border: 1px solid color-mix(in srgb, var(--green) 35%, #fff);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--green) 8%, #fff);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.pcard__mobile:hover {
+  border-color: var(--green);
+  background: color-mix(in srgb, var(--green) 14%, #fff);
+}
+
+.pcard__mobile > svg {
+  color: var(--green);
+}
+
+.pcard__mobile span {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 8px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, #4f8bff, var(--purple));
+  color: #fff;
+  font-size: 11px;
+}
+
+.pcard__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.pcard__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pcard__stack {
+  gap: 8px;
+}
+
+.pcard__stack li {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 6px 14px rgba(20, 45, 110, 0.08);
+}
+
+.pcard__stack svg {
+  width: 20px;
+  height: 20px;
+}
+
+.pcard__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+  padding: 13px 18px;
+  border: 0;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  font-size: 14.5px;
+  font-weight: 600;
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--accent) 28%, transparent);
+  transition: filter 0.2s, box-shadow 0.2s;
+}
+
+.pcard__cta svg {
+  transition: transform 0.25s var(--ease);
+}
+
+.pcard__cta:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 16px 32px color-mix(in srgb, var(--accent) 38%, transparent);
+}
+
+.pcard__cta:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* Store / website links */
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.project-links__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s var(--ease);
+}
+
+.project-links__item:hover {
+  border-color: var(--blue-line);
+  background: var(--blue-soft);
+  transform: translateY(-2px);
+}
+
+.project-links__item--playstore > svg:first-child {
+  color: #16a05a;
+}
+
+.project-links__item--appstore > svg:first-child {
+  color: #0d96f6;
+}
+
+.project-links__item--web > svg:first-child {
+  color: var(--blue);
+}
+
+.project-links__ext {
+  opacity: 0.5;
+}
+
+.project-card__tag-logo {
+  display: grid;
+  place-items: center;
+}
+
+.project-card__tag-logo svg {
+  width: 14px;
+  height: 14px;
+}
+
+@media (max-width: 860px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pcard__body {
+    padding: 12px 18px 20px;
+  }
+
+  .pcard__cover {
+    padding: 48px 16px 30px;
+  }
+
+  .pcard__brand {
+    gap: 14px;
+  }
+
+  .pcard__logo {
+    width: 92px;
+  }
+}

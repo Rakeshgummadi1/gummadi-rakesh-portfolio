@@ -1,0 +1,86 @@
+:root {
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-display: 'Manrope', system-ui, sans-serif;
+  --font-hand: 'Caveat', 'Segoe Script', cursive;
+
+  --ink: #14192d;
+  --muted: #687087;
+  --purple: #6935f5;
+  --purple-deep: #812df0;
+  --orange: #f07835;
+  --line: rgba(37, 44, 70, 0.1);
+
+  --bg: linear-gradient(125deg, #f4f7ff 0%, #ffffff 52%, #fff8f1 100%);
+  --glass: rgba(255, 255, 255, 0.78);
+  --glass-border: rgba(255, 255, 255, 0.9);
+  --topbar: rgba(255, 255, 255, 0.82);
+  --float-bg: rgba(255, 255, 255, 0.9);
+  --soft-purple: #f0eaff;
+  --soft-purple-ink: #6334ed;
+  --soft-orange: #fff0e3;
+  --secondary-border: #cfcde7;
+  --field-bg: rgba(255, 255, 255, 0.9);
+  --ambient-one: #c8c7ff;
+  --ambient-two: #ffd8b8;
+  --contact-bg: linear-gradient(130deg, #ffffff, #f5f0ff 65%, #fff4eb);
+
+  --band-lavender:
+    radial-gradient(circle at 8% 15%, rgba(105, 53, 245, 0.14), transparent 38%),
+    radial-gradient(circle at 92% 85%, rgba(224, 64, 138, 0.1), transparent 40%),
+    linear-gradient(180deg, #f1ecff 0%, #f8f5ff 100%);
+  --band-sky:
+    radial-gradient(circle at 90% 10%, rgba(47, 107, 255, 0.13), transparent 40%),
+    radial-gradient(circle at 5% 90%, rgba(14, 165, 160, 0.12), transparent 40%),
+    linear-gradient(180deg, #eaf2ff 0%, #f4f9ff 100%);
+  --band-peach:
+    radial-gradient(circle at 10% 20%, rgba(240, 120, 53, 0.14), transparent 40%),
+    radial-gradient(circle at 92% 80%, rgba(105, 53, 245, 0.1), transparent 40%),
+    linear-gradient(180deg, #fff0e4 0%, #fff8f2 100%);
+
+  --gradient-text: linear-gradient(95deg, #6238f4 0%, #a33de2 55%, #f07835 100%);
+  --gradient-button: linear-gradient(115deg, #6b35f5, #812df0);
+  --shadow-card: 0 15px 40px rgba(48, 36, 75, 0.05);
+  --shadow-float: 0 15px 38px rgba(37, 36, 71, 0.09);
+  --shadow-button: 0 12px 24px rgba(112, 56, 244, 0.23);
+
+  --radius-card: 22px;
+  --nav-height: 78px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --ink: #f1f0fb;
+  --muted: #aaaec2;
+  --line: rgba(255, 255, 255, 0.1);
+
+  --bg: linear-gradient(125deg, #111322 0%, #1b1930 60%, #221a29 100%);
+  --glass: rgba(32, 32, 55, 0.82);
+  --glass-border: rgba(255, 255, 255, 0.07);
+  --topbar: rgba(18, 19, 36, 0.85);
+  --float-bg: rgba(38, 38, 61, 0.92);
+  --soft-purple: #31274e;
+  --soft-purple-ink: #d2c2ff;
+  --soft-orange: #3d2a20;
+  --secondary-border: #45435e;
+  --field-bg: rgba(20, 21, 38, 0.8);
+  --ambient-one: #4b3d99;
+  --ambient-two: #7a4325;
+  --contact-bg: linear-gradient(130deg, #24243b, #2d2448 65%, #38271f);
+
+  --band-lavender:
+    radial-gradient(circle at 8% 15%, rgba(105, 53, 245, 0.22), transparent 40%),
+    linear-gradient(180deg, rgba(105, 53, 245, 0.1), rgba(105, 53, 245, 0.04));
+  --band-sky:
+    radial-gradient(circle at 90% 10%, rgba(47, 107, 255, 0.2), transparent 40%),
+    linear-gradient(180deg, rgba(47, 107, 255, 0.08), rgba(47, 107, 255, 0.03));
+  --band-peach:
+    radial-gradient(circle at 10% 20%, rgba(240, 120, 53, 0.18), transparent 40%),
+    linear-gradient(180deg, rgba(240, 120, 53, 0.08), rgba(240, 120, 53, 0.03));
+
+  --shadow-card: 0 15px 40px rgba(0, 0, 0, 0.25);
+  --shadow-float: 0 15px 38px rgba(0, 0, 0, 0.35);
+
+  color-scheme: dark;
+}

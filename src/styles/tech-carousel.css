@@ -1,0 +1,335 @@
+/* Skills carousel: floating bubbles, intentionally no orbit lines */
+.tech-carousel {
+  --size: clamp(118px, 10.5vw, 150px);
+  margin-top: 18px;
+}
+
+.tech-carousel__viewport {
+  position: relative;
+  height: calc(var(--size) * 1.5);
+}
+
+.tech-carousel__stage {
+  position: absolute;
+  inset: 0;
+  touch-action: pan-y;
+}
+
+/* Faded back row */
+.tech-carousel__ghosts {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.tech-ghost {
+  position: absolute;
+  top: 16%;
+  left: calc(50% + var(--gx));
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 18px rgba(32, 64, 140, 0.08);
+  opacity: var(--go);
+  filter: blur(2px);
+  transform: translate(-50%, -50%);
+  transition: left 1s cubic-bezier(0.45, 0, 0.25, 1), opacity 1s;
+}
+
+.tech-ghost svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Glowing pedestal under the active bubble */
+.tech-carousel__pedestal {
+  position: absolute;
+  top: calc(50% + var(--size) * 0.42 + 4px);
+  left: 50%;
+  z-index: 1;
+  width: calc(var(--size) * 1.25);
+  height: calc(var(--size) * 0.22);
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.6) 38%, transparent 70%),
+    radial-gradient(ellipse at center, rgba(21, 84, 240, 0.28) 0%, transparent 72%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Bubbles */
+.tech-bubble {
+  --dx: 0%;
+  --dy: 0px;
+  --s: 1;
+  --o: 1;
+  --blur: 0px;
+  --z: 20;
+  position: absolute;
+  top: calc(50% + var(--dy));
+  left: calc(50% + var(--dir) * var(--dx));
+  z-index: var(--z);
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: calc(var(--size) * 0.04);
+  width: var(--size);
+  height: var(--size);
+  padding: 0;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 28%, #ffffff 0%, #ffffff 50%, #eef3fc 100%);
+  box-shadow:
+    0 18px 36px rgba(32, 64, 140, 0.14),
+    inset 0 -10px 20px rgba(120, 150, 210, 0.12);
+  color: var(--ink);
+  opacity: var(--o);
+  filter: blur(var(--blur));
+  transform: translate(-50%, -50%) scale(var(--s));
+  cursor: pointer;
+  transition:
+    left 1s cubic-bezier(0.45, 0, 0.25, 1),
+    top 1s cubic-bezier(0.45, 0, 0.25, 1),
+    transform 1s cubic-bezier(0.45, 0, 0.25, 1),
+    opacity 1s,
+    filter 1s,
+    box-shadow 0.3s;
+}
+
+/*
+ * Equal edge-to-edge gaps (--g) between neighbouring bubbles, sized so the last
+ * visible bubble touches the stage edge. Radii come from the --s scales:
+ * active 0.84, then 0.74 / 0.62 / 0.54 / 0.46 -> 0.42 + 2*(0.37+0.31+0.27+0.23) = 2.78.
+ * Change the scales and these multipliers together.
+ */
+.tech-bubble {
+  --g: calc((50% - var(--size) * 2.78) / 4);
+}
+
+.tech-bubble[data-depth='1'] {
+  --dx: calc(var(--size) * 0.79 + var(--g));
+  --dy: 14px;
+  --s: 0.74;
+  --z: 12;
+}
+
+.tech-bubble[data-depth='2'] {
+  --dx: calc(var(--size) * 1.47 + var(--g) * 2);
+  --dy: 10px;
+  --s: 0.62;
+  --z: 10;
+}
+
+.tech-bubble[data-depth='3'] {
+  --dx: calc(var(--size) * 2.05 + var(--g) * 3);
+  --dy: 0px;
+  --s: 0.54;
+  --o: 0.95;
+  --z: 8;
+}
+
+.tech-bubble[data-depth='4'] {
+  --dx: calc(var(--size) * 2.55 + var(--g) * 4);
+  --dy: -12px;
+  --s: 0.46;
+  --o: 0.8;
+  --blur: 0.4px;
+  --z: 6;
+}
+
+/* Hidden: this slot wraps from one edge to the other */
+.tech-bubble[data-depth='5'] {
+  --dx: 53%;
+  --dy: -24px;
+  --s: 0.36;
+  --o: 0;
+  --blur: 2px;
+  --z: 4;
+  pointer-events: none;
+}
+
+.tech-bubble.is-active {
+  --s: 0.84;
+  border: 5px solid #fff;
+  box-shadow:
+    0 0 0 12px rgba(21, 84, 240, 0.07),
+    0 0 0 1px rgba(21, 84, 240, 0.12),
+    0 28px 50px rgba(32, 64, 140, 0.22),
+    inset 0 -10px 20px rgba(120, 150, 210, 0.14);
+}
+
+.tech-bubble:not(.is-active):hover {
+  box-shadow:
+    0 0 0 8px rgba(21, 84, 240, 0.12),
+    0 20px 40px rgba(32, 64, 140, 0.2);
+}
+
+.tech-bubble:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
+
+.tech-bubble__logo {
+  display: grid;
+  place-items: center;
+}
+
+.tech-bubble__logo svg {
+  width: calc(var(--size) * 0.36);
+  height: calc(var(--size) * 0.36);
+}
+
+.tech-bubble__name {
+  max-width: 84%;
+  font: 600 calc(var(--size) * 0.105) / 1.15 var(--font-display);
+  text-align: center;
+}
+
+/* Features row */
+.skill-highlights {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skill-highlight {
+  --tone: #1554f0;
+  --tone-2: #4f8bff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--tone) 22%, #fff);
+  border-left: 4px solid var(--tone);
+  border-radius: 14px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--tone) 12%, #fff) 0%, #fff 75%);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--tone) 14%, transparent);
+}
+
+.skill-highlight.reveal {
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease),
+    translate 0.25s var(--ease),
+    box-shadow 0.25s;
+}
+
+.skill-highlight:hover {
+  translate: 0 -3px;
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--tone) 24%, transparent);
+}
+
+.skill-highlight--green {
+  --tone: #16a05a;
+  --tone-2: #3fd18a;
+}
+
+.skill-highlight--purple {
+  --tone: #7a3df0;
+  --tone-2: #b07bff;
+}
+
+.skill-highlight--cyan {
+  --tone: #0b8fd0;
+  --tone-2: #36c6f0;
+}
+
+.skill-highlight strong {
+  display: block;
+  color: var(--ink);
+  font: 600 14.5px/1.25 var(--font-display);
+}
+
+.skill-highlight small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.skill-highlight__icon {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--tone-2), var(--tone));
+  color: #fff;
+  box-shadow: 0 6px 14px color-mix(in srgb, var(--tone) 35%, transparent);
+}
+
+@media (max-width: 1180px) {
+  .skill-highlights {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .tech-carousel {
+    --size: clamp(112px, 15vw, 140px);
+  }
+
+  /* Only depths 1-2 visible: 0.42 + 2*(0.37+0.31) = 1.78 */
+  .tech-bubble {
+    --g: calc((50% - var(--size) * 1.78) / 2);
+  }
+
+  .tech-bubble[data-depth='3'],
+  .tech-bubble[data-depth='4'] {
+    --dx: 50%;
+    --s: 0.32;
+    --o: 0;
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .tech-carousel {
+    --size: clamp(104px, 30vw, 124px);
+    margin-top: 18px;
+  }
+
+  .tech-carousel__ghosts {
+    display: none;
+  }
+
+  .tech-bubble[data-depth='1'] {
+    --dx: calc(var(--size) * 0.8);
+    --dy: 10px;
+    --s: 0.58;
+  }
+
+  .tech-bubble[data-depth='2'] {
+    --dx: calc(var(--size) * 1.16);
+    --dy: 4px;
+    --s: 0.4;
+    --o: 0.55;
+  }
+
+  .tech-bubble[data-depth='3'],
+  .tech-bubble[data-depth='4'] {
+    --dx: calc(var(--size) * 1.4);
+  }
+
+  .skill-highlights {
+    grid-template-columns: 1fr;
+    margin-top: 34px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-bubble,
+  .tech-ghost {
+    transition: none;
+  }
+}
