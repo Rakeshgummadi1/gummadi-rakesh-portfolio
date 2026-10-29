@@ -47,6 +47,128 @@ export const carouselTechs = [
   'Spring Security',
 ] as const;
 
+export type CarouselTech = (typeof carouselTechs)[number];
+
+export type TechUsage = {
+  summary: string;
+  usedIn: { place: string; detail: string }[];
+};
+
+const VPN = 'Dosha Nivaran — Project';
+const CRM = 'Anvaya24by7 — CRM Project';
+
+/** "Where I used it" details shown when the centred carousel tech is hovered or tapped */
+export const techUsage: Record<CarouselTech, TechUsage> = {
+  Java: {
+    summary: 'My core language: OOP, Collections, Streams, Lambdas and multithreading.',
+    usedIn: [{ place: VPN, detail: 'Used Java to implement backend logic and process application requests.' }],
+  },
+  'Spring Boot': {
+    summary: 'My main framework for backend services and REST APIs.',
+    usedIn: [
+      {
+        place: VPN,
+        detail: 'Developed backend REST APIs to handle frontend requests and perform business operations.',
+      },
+      { place: CRM, detail: 'Developed backend REST APIs and implemented business logic for the CRM application.' },
+    ],
+  },
+  'Spring Security': {
+    summary: 'Authentication and authorization for secure APIs.',
+    usedIn: [
+      {
+        place: CRM,
+        detail: 'Used Spring Security and JWT for authentication and authorization to protect backend APIs.',
+      },
+    ],
+  },
+  Kafka: {
+    summary: 'Event-driven messaging between services.',
+    usedIn: [
+      {
+        place: CRM,
+        detail: 'Implemented audit logging by publishing events to Kafka topics and consuming them in the Audit Service.',
+      },
+    ],
+  },
+  Hibernate: {
+    summary: 'ORM for entity mapping, relationships and transactions.',
+    usedIn: [
+      {
+        place: VPN,
+        detail: 'Used internally by Spring Boot through Spring Data JPA to map entities and handle MySQL operations.',
+      },
+      {
+        place: CRM,
+        detail: 'Used internally by Spring Boot through Spring Data JPA to map entities and handle MySQL operations.',
+      },
+    ],
+  },
+  Microservices: {
+    summary: 'Independent services, each owning its own business operations.',
+    usedIn: [
+      {
+        place: CRM,
+        detail:
+          'Developed backend functionality across separate services for CRM, Admin, Audit, and Telephony. Each service handles specific business operations.',
+      },
+    ],
+  },
+  MySQL: {
+    summary: 'Relational database for application data.',
+    usedIn: [
+      { place: VPN, detail: 'Used MySQL to store, retrieve, and manage application data.' },
+      {
+        place: CRM,
+        detail: 'Used to store and retrieve application data, including CRM records and other business information.',
+      },
+    ],
+  },
+  Git: {
+    summary: 'Version control for all my projects, with GitHub.',
+    usedIn: [
+      { place: VPN, detail: 'Used Git to commit and push backend code to the remote repository.' },
+      {
+        place: CRM,
+        detail: 'Used Git to commit changes, manage source code, and push code to remote repositories for version control.',
+      },
+    ],
+  },
+  Docker: {
+    summary: 'Containers for running services consistently.',
+    usedIn: [
+      {
+        place: 'Currently exploring',
+        detail: 'Learning Docker while working alongside the DevOps team that deploys our applications.',
+      },
+    ],
+  },
+  RabbitMQ: {
+    summary: 'Message broker for asynchronous communication between microservices.',
+    usedIn: [
+      {
+        place: 'BookYourGlam — Project',
+        detail:
+          'Implemented asynchronous communication between services such as CRM, Telephony, and Audit using message queues. It handled events like lead assignment, call completion, follow-up creation, and notifications, so services process messages independently without waiting for each other.',
+      },
+    ],
+  },
+  React: {
+    summary: 'React for web interfaces, built with AI-assisted development.',
+    usedIn: [
+      {
+        place: VPN,
+        detail:
+          'The frontend was developed with AI assistance using React, while my primary contribution was backend development.',
+      },
+      {
+        place: CRM,
+        detail: 'Used for the web frontend, including dashboards, forms, and CRM screens. AI tools assisted with frontend development.',
+      },
+    ],
+  },
+};
+
 export type SkillHighlight = {
   title: string;
   description: string;

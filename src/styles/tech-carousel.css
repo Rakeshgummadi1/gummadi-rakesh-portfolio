@@ -267,10 +267,132 @@
   box-shadow: 0 6px 14px color-mix(in srgb, var(--tone) 35%, transparent);
 }
 
+/* "Where I used it": takes the highlights' place while the centred tech is hovered or tapped */
+.skill-highlights-area {
+  display: grid;
+}
+
+.skill-highlights-area > * {
+  grid-area: 1 / 1;
+}
+
+.skill-highlights-area .skill-highlights {
+  transition:
+    opacity 0.25s var(--ease),
+    visibility 0.25s;
+}
+
+.skill-highlights-area.is-showing-usage .skill-highlights {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.tech-usage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+  align-self: start;
+  gap: 14px;
+  margin-top: 28px;
+  animation: tech-usage-in 0.3s var(--ease) both;
+}
+
+.tech-usage__head,
+.tech-usage__item {
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--blue) 22%, #fff);
+  border-radius: 14px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--blue) 12%, #fff) 0%, #fff 75%);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--blue) 14%, transparent);
+}
+
+.tech-usage__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-left: 4px solid var(--blue);
+}
+
+.tech-usage__head:only-child {
+  grid-column: 1 / -1;
+}
+
+.tech-usage__logo {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 6px 14px rgba(32, 64, 140, 0.14);
+}
+
+.tech-usage__logo svg {
+  width: 24px;
+  height: 24px;
+}
+
+.tech-usage__head small {
+  display: block;
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.tech-usage__head strong {
+  display: block;
+  color: var(--ink);
+  font: 600 15px/1.25 var(--font-display);
+}
+
+.tech-usage__summary {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.tech-usage__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tech-usage__item strong {
+  display: block;
+  color: var(--ink);
+  font: 600 14px/1.25 var(--font-display);
+}
+
+.tech-usage__item small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+@keyframes tech-usage-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
 @media (max-width: 1180px) {
   .skill-highlights {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
+  }
+
+  .tech-usage {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -325,11 +447,19 @@
     grid-template-columns: 1fr;
     margin-top: 34px;
   }
+
+  .tech-usage {
+    margin-top: 34px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .tech-bubble,
   .tech-ghost {
     transition: none;
+  }
+
+  .tech-usage {
+    animation: none;
   }
 }
