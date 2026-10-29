@@ -39,7 +39,7 @@ export const profile = {
     college: "Aurora's Scientific Technological Institute",
   },
   // Drop your resume PDF into public/ with this name for the download button to work.
-  resumeUrl: `${import.meta.env.BASE_URL}resume.pdf`,
+  resumeUrl: '/resume.pdf',
   social: {
     email: 'gummadi0312@gmail.com',
     phone: '+91 8978053109',

@@ -113,7 +113,9 @@ export function ContactFooter() {
           </nav>
 
           <div className="contact__legal">
-            <small>© {new Date().getFullYear()} {profile.displayName}. All rights reserved.</small>
+            <small suppressHydrationWarning>
+              © {new Date().getFullYear()} {profile.displayName}. All rights reserved.
+            </small>
             <a href="#home" className="contact__top" aria-label="Back to top">
               <ArrowUp size={16} aria-hidden="true" />
             </a>

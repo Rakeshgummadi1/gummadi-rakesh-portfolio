@@ -13,7 +13,7 @@ export function CountUp({ value, duration = 1400 }: CountUpProps) {
 
   const reduceMotion = usePrefersReducedMotion();
   const ref = useRef<HTMLSpanElement>(null);
-  const [current, setCurrent] = useState(target === null || reduceMotion ? target : 0);
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
     const node = ref.current;
@@ -44,7 +44,7 @@ export function CountUp({ value, duration = 1400 }: CountUpProps) {
 
   return (
     <span ref={ref}>
-      {current}
+      {reduceMotion ? target : current}
       {suffix}
     </span>
   );

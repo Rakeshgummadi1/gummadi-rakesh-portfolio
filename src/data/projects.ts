@@ -48,7 +48,7 @@ export const projects: Project[] = [
   {
     id: 'dosha-nivaran',
     product: 'Dosha Nivaran',
-    logo: doshaNivaranLogo,
+    logo: doshaNivaranLogo.src,
     logoShape: 'circle',
     coverSubtitle: 'Vendor Onboarding, Verification and Management',
     title: 'Dosha Nivaran – VPN Module',
@@ -105,7 +105,7 @@ export const projects: Project[] = [
     current: true,
     product: 'Anvaya',
     productSuffix: '24by7',
-    logo: anvayaLogo,
+    logo: anvayaLogo.src,
     logoShape: 'square',
     coverSubtitle: 'Customer Relationship Management',
     title: 'Customer Relationship Management (CRM)',

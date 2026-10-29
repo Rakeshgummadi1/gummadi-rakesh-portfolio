@@ -1,14 +1,13 @@
 # Gummadi Rakesh — Portfolio
 
-Personal portfolio for a Java Full Stack Developer based in Hyderabad.
+Personal portfolio for a Java Full Stack Developer based in Hyderabad, built with Next.js (static export).
 
 ## Commands
 
 ```bash
 npm install
-npm run dev
-npm run build
-npm run preview
+npm run dev     # http://localhost:3000
+npm run build   # static site in out/
 ```
 
 ## Customize
@@ -27,4 +26,5 @@ Contact details currently use resume values:
 
 ## Deploy
 
-- **Vercel / Netlify**: build `npm run build`, publish `dist`
+- **GitHub Pages**: every push to `main` runs `.github/workflows/deploy.yml`, which builds and publishes `out/` to https://rakeshgummadi.online
+- **Netlify**: build `npm run build`, publish `out`
